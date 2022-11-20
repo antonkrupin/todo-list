@@ -8,6 +8,28 @@ import { database } from '../firebase/firebase';
 
 export const fetchTodos = createAsyncThunk(
   'todos/fetchTodos',
+    async function() {
+      const refdb = ref(database);
+      const todos1 = [];
+      console.log('start')
+      const test = await get(child(refdb, 'todos')).then((snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          const keys = Object.keys(data);
+          keys.forEach((key) => {
+            const todo = data[key];
+            todo.key = key;
+            todos1.push(todo);
+          });
+          return todos1;
+        } else {
+          console.log("No data available");
+        }
+      });
+      console.log('test', test);
+      console.log('finish');
+      return test;
+    }
   /*async function() {
     const response = ref(database, 'todos');
     const todos = [];
@@ -99,8 +121,10 @@ const todoSlice = createSlice({
       },
       [fetchTodos.fulfilled]: (state, action) => {
         console.log('resolved');
-        console.log(action.payload);
-        state.todos = action.payload;
+        //state.todos.push(action.payload);
+        //state.todos = action.payload;
+        //console.log(action.payload);
+        //state.todos = action.payload;
       },
       [fetchTodos.rejected]: (state) => {
         console.log('rejected');
@@ -114,7 +138,7 @@ export const {
   toggleComplete,
   removeTodo,
   addTodoFb,
-  setTodos,
+  
 } = todoSlice.actions;
 
 export default todoSlice.reducer;

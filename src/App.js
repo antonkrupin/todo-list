@@ -14,11 +14,13 @@ const App = () => {
   
 
   useEffect(() => {
-    //dispatch(fetchTodos());
+    console.log('start useeffect')
+    dispatch(fetchTodos());
+    console.log('end useeffect')
     /*const test = dispatch(fetchTodos());
     console.log(test)
     test.then((data) => console.log(data.payload));*/
-    dispatch(setTodos());
+    //dispatch(setTodos());
     console.log('todos', todos);
   }, []);
 
