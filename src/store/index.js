@@ -5,6 +5,6 @@ import todoReducer from './todoSlice';
 export default configureStore({
   reducer: {
     filter: filterReducer,
-    todo: todoReducer,
+    todos: todoReducer,
   },
 });
