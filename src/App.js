@@ -10,6 +10,8 @@ import './App.css';
 
 const App = () => {
   const dispatch = useDispatch();
+  const todos = useSelector((state) => state.todos.todos);
+  
 
   useEffect(() => {
     //dispatch(fetchTodos());
@@ -17,6 +19,7 @@ const App = () => {
     console.log(test)
     test.then((data) => console.log(data.payload));*/
     dispatch(setTodos());
+    console.log('todos', todos);
   }, []);
 
   return (

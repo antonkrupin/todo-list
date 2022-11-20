@@ -7,6 +7,7 @@ import TodoItem from './TodoItem';
 const TodoList = () => {
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos.todos);
+  console.log('todos', todos);
   
   return (
     <div className="d-flex flex-column">

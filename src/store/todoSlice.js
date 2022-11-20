@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, current } from '@reduxjs/toolkit';
 
 import { db } from '../firebase/firebase';
 import { collection, addDoc, getDocs } from 'firebase/firestore';
@@ -64,19 +64,23 @@ const todoSlice = createSlice({
         if (snapshot.exists()) {
           const data = snapshot.val();
           const keys = Object.keys(data);
-          console.log(data);
           keys.forEach((key) => {
-            console.log(data[key]);
-            todos.push(data[key])
+            const todo = data[key];
+            todo.key = key;
+            state.todos = [todo, ...state.todos];
+            todos.push(todo);
           });
           return todos;
         } else {
           console.log("No data available");
         }
       })
-      /*console.log('start');
+      console.log('start');
       console.log(test);
-      console.log('finished')*/
+      console.log('state', state.todos);
+      //state.todos.push(test);
+      console.log('state', state.todos);
+      console.log('finished');
       /*const response = ref(database, 'todos');
       const todos = [];
       onValue(response, (snapshot) => {
