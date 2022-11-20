@@ -1,9 +1,10 @@
 import * as fb from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
+import { getDatabase } from 'firebase/database';
 
 import firebaseConfig from "./config";
 
-const firebase = fb.initializeApp(firebaseConfig);
-const db = getFirestore(firebase);
+export const firebase = fb.initializeApp(firebaseConfig);
+export const db = getFirestore(firebase);
+export const database = getDatabase(firebase);
 
-export default db;
