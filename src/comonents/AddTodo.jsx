@@ -4,7 +4,9 @@ import { useDispatch } from 'react-redux';
 
 import { addTodo } from '../store/todoSlice'; 
 
-const AddTodo = () => {
+const AddTodo = (props) => {
+  const { db } = props;
+
   const [filePaths, setFilePath] = useState([]);
 
   const dispatch = useDispatch();
