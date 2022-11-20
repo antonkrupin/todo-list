@@ -1,22 +1,45 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
+import 'datejs';
+import { useDispatch } from 'react-redux';
+
+import { addTodo } from '../store/todoSlice'; 
 
 const AddTodo = () => {
+  const [filePaths, setFilePath] = useState([]);
+
+  const dispatch = useDispatch();
+
+  let reader = new FileReader();
+
+  const titleRef = useRef();
+  const descriptionRef = useRef();
+  const dateRef = useRef();
+  const fileUploadRef = useRef();
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log('test');
-  }
-  const handleFileUplodad = (e) => {
-    let reader = new FileReader();
-    let file = e.target.files[0];
+    dispatch(addTodo({
+      title: titleRef.current.value,
+      description: descriptionRef.current.value,
+      date: dateRef.current.value,
+      files: filePaths,
+      completed: false,
+    }));
+    setFilePath([]);
+    titleRef.current.value = '';
+    descriptionRef.current.value = '';
+    fileUploadRef.current.value = '';
+  };
 
+  const handleFileUplodad = (e) => {
+    let file = e.target.files[0];
     reader.onloadend = () => {
-      this.setState({
-        file: file,
-        imagePreviewUrl: reader.result
+      setFilePath((prev) => {
+       return [...prev, file.name];
       });
     }
     reader.readAsDataURL(file)
-  }
+  };
 
   return (
     <div className="d-flex w-50 mx-auto m-2 border rounded shadow-sm">
@@ -27,16 +50,39 @@ const AddTodo = () => {
         <input
           className="form-control pb-2"
           name="todoTitle"
+          ref={titleRef}
         />
         <label className="pb-2" htmlFor="todoDescription">Описание задачи</label>
         <textarea
           className="form-control pb-2"
-          name="todoDescription" id="" cols="30" rows="5"/>
-        <label className="pb-2" htmlFor="todoFilex">Загрузка файлов</label>
-        <input className="pb-2 fileInput" type="file" onChange={(e) => handleFileUplodad(e)}/>
+          name="todoDescription" id="" cols="30" rows="5"
+          ref={descriptionRef}  
+        />
+        <label htmlFor="todoDate">Дата завершения</label>
+        <input
+          className="w-50"
+          type="date"
+          name="todoDate"
+          defaultValue={Date.today().toString('yyyy-MM-dd')}
+          ref={dateRef}
+        />
+        <label className="pb-2" htmlFor="todoFile">Загрузка файлов</label>
+        <input
+          className="pb-2 fileInput"
+          type="file"
+          onChange={(e) => handleFileUplodad(e)}
+          ref={fileUploadRef}
+        />
+        <div>
+          {filePaths.map((file, index) => (
+          <li key={index}>
+            {file}
+          </li>
+        ))}
+        </div>
         <button
           type="submit"
-          className="btn btn-primary">
+          className="w-50 btn btn-primary">
             Добавить задачу
         </button>
       </form>
