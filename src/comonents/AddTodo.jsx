@@ -1,13 +1,17 @@
 import React, { useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import 'datejs';
 
-import { addTodo } from '../store/todoSlice';
+import { getStorage, ref, getDownloadURL, uploadBytes } from 'firebase/storage';
+
+import { addTodo, changeTodoStatus } from '../store/todoSlice';
 
 const AddTodo = () => {
   const [filePaths, setFilePath] = useState([]);
 
   const dispatch = useDispatch();
+
+  const todoStatus = useSelector((state) => state.todos.todoStatus);
 
   let reader = new FileReader();
 
@@ -36,8 +40,18 @@ const AddTodo = () => {
   const handleFileUplodad = (e) => {
     let file = e.target.files[0];
     reader.onloadend = () => {
-      setFilePath((prev) => {
-       return [...prev, file.name];
+      dispatch(changeTodoStatus('loading'))
+      const storage = getStorage();
+      const filesRef = ref(storage, 'files/' + file.name);
+      
+      uploadBytes(filesRef, file)
+      .then((snapshot) => {
+        getDownloadURL(snapshot.ref).then((downloadURL) => {
+          setFilePath((prev) => {
+            return [...prev, [file.name, downloadURL]];
+          });
+        })
+        dispatch(changeTodoStatus('loaded'))
       });
     }
     reader.readAsDataURL(file)
@@ -69,17 +83,28 @@ const AddTodo = () => {
           ref={dateRef}
 					required
         />
-        <label className="pb-2" htmlFor="todoFile">Загрузка файлов</label>
-        <input
-          className="pb-2 fileInput"
-          type="file"
-          onChange={(e) => handleFileUplodad(e)}
-          ref={fileUploadRef}
-        />
+        {todoStatus !== 'loading' && (
+          <>
+             <label className="pb-2" htmlFor="todoFile">Загрузка файлов</label>
+            <input
+              className="pb-2 fileInput"
+              type="file"
+              onChange={(e) => handleFileUplodad(e)}
+              ref={fileUploadRef}
+            />
+          </>
+        )}
+        {todoStatus === 'loading' && (
+          <div className="d-flex align-items-center">
+            <div className="spinner-border text-primary m-2" role="status">
+            </div>
+            <h6>Идет загрузка файла</h6>
+          </div>
+        )}
         <div>
           {filePaths.map((file, index) => (
           <li key={index}>
-            {file}
+            {file[0]}
           </li>
         ))}
         </div>
