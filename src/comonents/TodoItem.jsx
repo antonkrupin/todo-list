@@ -3,8 +3,6 @@ import { useDispatch } from 'react-redux';
 
 import 'datejs';
 
-import { database } from '../firebase/firebase';
-import { ref, update } from 'firebase/database';
 import { toggleComplete, removeTodo, setTodoForChange } from '../store/todoSlice';
 import { changeTodoModalShow } from '../store/modalsSlice';
 
@@ -28,9 +26,6 @@ const TodoItem = (props) => {
 	const changeTodo = (e) => {
 		e.preventDefault();
 		const id = todoRef.current.id;
-		/*update(ref(database, 'todos/' + id), {
-			title: 'new title',
-		});*/
 		dispatch(setTodoForChange({id, todo}));
 		dispatch(changeTodoModalShow());
 	}
@@ -71,7 +66,7 @@ const TodoItem = (props) => {
 					<div className="m-2">
           <h3>Прикрепленные файлы</h3>
           {todo.files.map((file, index) => (
-            <li key={index}>{file}</li>
+						<li key={index}><a href={file[1]} target="_blank" rel="noreferrer">{file[0]}</a></li>
           ))}
 					</div>
 				)}
@@ -86,3 +81,9 @@ const TodoItem = (props) => {
 };
 
 export default TodoItem;
+
+/*
+
+<li key={index}>{file}</li>
+
+*/
