@@ -1,17 +1,10 @@
 import React, { useState, useRef } from 'react';
-import 'datejs';
 import { useDispatch } from 'react-redux';
+import 'datejs';
 
-import { collection, addDoc, getDocs } from 'firebase/firestore';
-import { addTodo, addTodoFb } from '../store/todoSlice';
+import { addTodo } from '../store/todoSlice';
 
-import { ref, set, push } from 'firebase/database';
-import { database } from '../firebase/firebase';
-
-
-const AddTodo = (props) => {
-  const { db } = props;
-
+const AddTodo = () => {
   const [filePaths, setFilePath] = useState([]);
 
   const dispatch = useDispatch();
@@ -23,23 +16,8 @@ const AddTodo = (props) => {
   const dateRef = useRef();
   const fileUploadRef = useRef();
 
-  const test = async (data) => {
-    try {
-      push(ref(database, 'todos'), data);
-    } catch(e) {
-      throw e;
-    }
-  }
-
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    test({
-      title: titleRef.current.value,
-      description: descriptionRef.current.value,
-      date: dateRef.current.value,
-      files: filePaths,
-      completed: false,
-    });
     dispatch(addTodo({
       title: titleRef.current.value,
       description: descriptionRef.current.value,
@@ -75,6 +53,7 @@ const AddTodo = (props) => {
           className="form-control pb-2"
           name="todoTitle"
           ref={titleRef}
+					required
         />
         <label className="pb-2" htmlFor="todoDescription">Описание задачи</label>
         <textarea
@@ -88,6 +67,7 @@ const AddTodo = (props) => {
           type="date"
           name="todoDate"
           ref={dateRef}
+					required
         />
         <label className="pb-2" htmlFor="todoFile">Загрузка файлов</label>
         <input
@@ -114,9 +94,3 @@ const AddTodo = (props) => {
 };
 
 export default AddTodo;
-
-/*
-
-defaultValue={Date.today().toString('yyyy-MM-dd')}
-
-*/
