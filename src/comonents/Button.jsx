@@ -1,7 +1,13 @@
 import React from 'react';
 
 const Button = (props) => {
-	const { completed, onClick, buttonType, expired } = props;
+	const {
+		completed,
+		onClick,
+		buttonType,
+		expired
+	} = props;
+
 	switch(buttonType) {
 		case 'EndTask': {
 			let text = 'Завершить';
