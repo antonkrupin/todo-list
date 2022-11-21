@@ -8,3 +8,4 @@ export const firebase = fb.initializeApp(firebaseConfig);
 export const db = getFirestore(firebase);
 export const database = getDatabase(firebase);
 
+
