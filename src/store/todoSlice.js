@@ -1,15 +1,13 @@
 import { createSlice, createAsyncThunk, current } from '@reduxjs/toolkit';
 
-import { db } from '../firebase/firebase';
-import { collection, addDoc, getDocs } from 'firebase/firestore';
-//import { ref, onValue, get, child } from 'firebase/database';
 import { database } from '../firebase/firebase';
-import { ref, set, push, remove, update } from 'firebase/database';
+import { ref, push, remove, update } from 'firebase/database';
 
 const todoSlice = createSlice({
   name: 'todos',
   initialState: {
     todoForChange: [],
+    todoStatus: '',
   },
   reducers: {
     addTodo: (state, action) => {
@@ -21,18 +19,37 @@ const todoSlice = createSlice({
     },
     toggleComplete: (state, action) => {
 			const {id, completed } = action.payload;
-			update(ref(database, 'todos/' + id), {
-				completed: !completed,
-			});
+      try {
+				update(ref(database, 'todos/' + id), {
+          completed: !completed,
+        });
+			} catch(e) {
+				throw e;
+			}
     },
     removeTodo: (state, action) => {
 			const id = action.payload;
-			remove(ref(database, 'todos/' + id));
+      try {
+				remove(ref(database, 'todos/' + id));
+			} catch(e) {
+				throw e;
+			}
     },
 		setTodoForChange: (state, action) => {
 			const { id, todo } = action.payload;
 			state.todoForChange = [id, todo];
 		},
+    changeTodo: (state, action) => {
+      const { todoKey, changedTodo } = action.payload;
+      try {
+				update(ref(database, 'todos/' + todoKey), changedTodo);
+			} catch(e) {
+				throw e;
+			}
+    },
+    changeTodoStatus: (state, action) => {
+      state.todoStatus = action.payload;
+    }
   }
 });
 
@@ -41,6 +58,8 @@ export const {
   toggleComplete,
   removeTodo,
 	setTodoForChange,
+  changeTodo,
+  changeTodoStatus,
 } = todoSlice.actions;
 
 export default todoSlice.reducer;
