@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -6,6 +5,9 @@ import { Provider } from 'react-redux';
 import App from './App';
 import { db } from './firebase/firebase';
 import store from './store/index';
+
+import 'bootstrap/dist/js/bootstrap.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './index.css';
 
