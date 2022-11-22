@@ -2,8 +2,6 @@ import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import 'datejs';
 
-import { getStorage, ref, getDownloadURL, uploadBytes } from 'firebase/storage';
-
 import { uploadFile } from '../firebase/firebase';
 import { addTodo, changeTodoStatus } from '../store/todoSlice';
 
@@ -45,18 +43,6 @@ const AddTodo = () => {
     reader.onloadend = () => {
       dispatch(changeTodoStatus('loading'));
 			uploadFile(file, setFilePath());
-      /*const storage = getStorage();
-      const filesRef = ref(storage, 'files/' + file.name);
-      
-      uploadBytes(filesRef, file)
-      .then((snapshot) => {
-        getDownloadURL(snapshot.ref).then((downloadURL) => {
-          setFilePath((prev) => {
-            return [...prev, [file.name, downloadURL]];
-          });
-        })
-        //dispatch(changeTodoStatus('loaded'));
-      });*/
 			dispatch(changeTodoStatus('loaded'));
     }
     reader.readAsDataURL(file);
