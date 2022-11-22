@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "npx serve -s build",
-    "build": "DISABLE_ESLINT_PLUGIN=true npm run build",
+    "build": "npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
