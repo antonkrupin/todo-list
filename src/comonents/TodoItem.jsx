@@ -9,15 +9,15 @@ import { changeTodoModalShow } from '../store/modalsSlice';
 import Button from './Button';
 
 const TodoItem = (props) => {
-  const { todo, id } = props;
-	
+	const dispatch = useDispatch();
+
 	const todoRef = useRef();
 
-	const dispatch = useDispatch();
+	const { todo, id } = props;
 
 	const expired = Date.compare(Date.parse(todo.date), Date.today())
 	
-	const deleteTodo = (e) => {
+	const removeTodo = (e) => {
 		e.preventDefault();
 		const id = todoRef.current.id;
 		dispatch(removeTodo(id));
@@ -30,7 +30,7 @@ const TodoItem = (props) => {
 		dispatch(changeTodoModalShow());
 	}
 
-	const endTodo = (e) => {
+	const toggleComplete = (e) => {
 		e.preventDefault();
 		const id = todoRef.current.id;
 		const completed = todo.completed;
@@ -72,9 +72,9 @@ const TodoItem = (props) => {
 				)}
       </div>
       <div className="d-flex flex-column">
-				<Button buttonType={"EndTask"} onClick={(e) => endTodo(e)} completed={todo.completed} expired={expired}/>
+				<Button buttonType={"EndTask"} onClick={(e) => toggleComplete(e)} completed={todo.completed} expired={expired}/>
 				<Button buttonType={"ChangeTask"} onClick={(e) => changeTodo(e)} completed={todo.completed} expired={expired}/>
-				<Button buttonType={"DeleteTask"} onClick={(e) => deleteTodo(e)} completed={todo.completed} expired={expired}/>
+				<Button buttonType={"DeleteTask"} onClick={(e) => removeTodo(e)} completed={todo.completed} expired={expired}/>
       </div>
     </div>
   )
