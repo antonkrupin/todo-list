@@ -4,14 +4,15 @@ import 'datejs';
 
 import { getStorage, ref, getDownloadURL, uploadBytes } from 'firebase/storage';
 
+import { uploadFile } from '../firebase/firebase';
 import { addTodo, changeTodoStatus } from '../store/todoSlice';
 
 const AddTodo = () => {
-  const [filePaths, setFilePath] = useState([]);
-
   const dispatch = useDispatch();
 
   const todoStatus = useSelector((state) => state.todos.todoStatus);
+
+	const [filePaths, setFilePath] = useState([]);
 
   let reader = new FileReader();
 
@@ -22,6 +23,7 @@ const AddTodo = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+
     dispatch(addTodo({
       title: titleRef.current.value,
       description: descriptionRef.current.value,
@@ -39,9 +41,11 @@ const AddTodo = () => {
 
   const handleFileUplodad = (e) => {
     let file = e.target.files[0];
+		
     reader.onloadend = () => {
       dispatch(changeTodoStatus('loading'));
-      const storage = getStorage();
+			uploadFile(file, setFilePath());
+      /*const storage = getStorage();
       const filesRef = ref(storage, 'files/' + file.name);
       
       uploadBytes(filesRef, file)
@@ -51,8 +55,9 @@ const AddTodo = () => {
             return [...prev, [file.name, downloadURL]];
           });
         })
-        dispatch(changeTodoStatus('loaded'));
-      });
+        //dispatch(changeTodoStatus('loaded'));
+      });*/
+			dispatch(changeTodoStatus('loaded'));
     }
     reader.readAsDataURL(file);
   };
