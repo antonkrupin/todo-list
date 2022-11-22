@@ -1,8 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import dayjs from 'dayjs';
-
 import { uploadFile } from '../firebase/firebase';
 import { addTodo, changeTodoStatus } from '../store/todoSlice';
 
