@@ -51,7 +51,10 @@ const AddTodo = () => {
   };
 
   return (
-    <div className="d-flex w-50 mx-auto m-2 border rounded shadow-sm">
+    <div className="d-flex mx-auto flex-column m-2 p-5 border rounded shadow-sm">
+      <div className="text-primary text-center">
+      <h4>Добавить новую задачу</h4>
+      </div>
       <form
         className="d-flex w-100 m-2 flex-column justify-content-start"
         onSubmit={(e) => handleFormSubmit(e)}>
