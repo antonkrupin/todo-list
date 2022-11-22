@@ -1,6 +1,14 @@
-# Getting Started with Create React App
+# Todo List Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This application use firebase for store data.
+
+## For using this application:
+
+### clone repository
+
+### run `npm install`
+
+### run `npm start` application starts on localhost:3000
 
 ## Available Scripts
 
