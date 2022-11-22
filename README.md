@@ -11,6 +11,5 @@ This application use firebase for store data.
 ### run `npm start` application starts on localhost:3000
 
 ## Application deployed:
-### on [railway.app](https://railway.app/) - (https://todo-list-production-93aa.up.railway.app/){:target="_blank"}
-### [test](https://todo-list-production-93aa.up.railway.app/){:target="_blank"}
+### on [railway.app](https://railway.app/) - https://todo-list-production-93aa.up.railway.app/
 ### on [vercel](https://vercel.com/) - https://todo-list-antonkrupin.vercel.app/
