@@ -15,7 +15,7 @@ const Button = (props) => {
 				text = 'Возобновить';
 			}
 			let className="btn btn-outline-success m-2";
-			if (expired === -1) {
+			if (expired < 0) {
 				className="btn btn-outline-success m-2 disabled";
 			}
 			return (
@@ -25,7 +25,7 @@ const Button = (props) => {
 		case 'ChangeTask': {
 			let text = "Изменить";
 			let className = "btn btn-outline-primary m-2";
-			if (expired === -1) {
+			if (expired < 0) {
 				className="btn btn-outline-primary m-2 disabled";
 			}
 			return (
