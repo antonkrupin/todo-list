@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
-
 import dayjs from 'dayjs';
 
 import {
@@ -8,17 +7,16 @@ import {
 	removeTodo,
 	setTodoForChange
 } from '../store/todoSlice';
-
 import { changeTodoModalShow } from '../store/modalsSlice';
 import Button from './Button';
 
 
 const TodoItem = (props) => {
+	const { todo, id } = props;
+
 	const dispatch = useDispatch();
 
 	const todoRef = useRef();
-
-	const { todo, id } = props;
 
 	const expired = dayjs(todo.date).diff(dayjs(), 'day');
 	//const expired = Date.compare(Date.parse(todo.date), Date.today())
@@ -75,10 +73,12 @@ const TodoItem = (props) => {
 				<hr />
 				{todo.files && (
 					<div className="m-2">
-          <h4 className="text-primary">Прикрепленные файлы</h4>
-          {todo.files.map((file, index) => (
-						<li key={index}><a className="text-secondary" href={file[1]} target="_blank" rel="noreferrer">{file[0]}</a></li>
-          ))}
+          	<h4 className="text-primary">Прикрепленные файлы</h4>
+						{todo.files.map((file, index) => (
+							<li key={index}>
+								<a className="text-secondary" href={file[1]} target="_blank" rel="noreferrer">{file[0]}</a>
+							</li>
+						))}
 					</div>
 				)}
       </div>
@@ -92,9 +92,3 @@ const TodoItem = (props) => {
 };
 
 export default TodoItem;
-
-/*
-
-"start": "npx serve -s build"
-
-*/

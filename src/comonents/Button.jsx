@@ -44,7 +44,7 @@ const Button = (props) => {
 		case 'AddTask': {
 			let text = "Добавить задачу";
 			let className = "btn btn-primary";
-			if (todoStatus === 'loading') {
+			if (todoStatus === ('startLoadingFile')) {
 				className = "btn btn-primary disabled";
 			}
 			return (

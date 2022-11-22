@@ -1,13 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-	isChangeTodoShow: false,
-};
 
 const modalsSlice = createSlice({
 	name: 'modals',
-	initialState,
+	initialState: {
+		isChangeTodoShow: false,
+	},
 	reducers: {
+		/**
+		 * show and hide modal window
+		 * @param {boolean} state 
+		 */
 		changeTodoModalShow: (state) => {
 			state.isChangeTodoShow = !state.isChangeTodoShow;
 		},

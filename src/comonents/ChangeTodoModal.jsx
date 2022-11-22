@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
 import { Modal, Button } from 'react-bootstrap';
 
 import { changeTodo } from '../store/todoSlice';
@@ -15,10 +14,12 @@ const ChangeTodoModal = () => {
 	const dateRef = useRef();
 	
 	const isChangeTodoShow = useSelector((state) => state.modals.isChangeTodoShow);
+	
+	/*const todoKey = useSelector((state) => state.todos.todoForChange[0]);
 
-	const todoKey = useSelector((state) => state.todos.todoForChange[0]);
+	const todoForChange = useSelector((state) => state.todos.todoForChange[1]);*/
 
-	const todoForChange = useSelector((state) => state.todos.todoForChange[1]);
+	const [ todoForChangeKey, todoForChange ] = useSelector((state) => state.todos.todoForChange);
 	
 	const handleSaveChanges = (e) => {
 		e.preventDefault();
@@ -27,7 +28,7 @@ const ChangeTodoModal = () => {
 			description: descriptionRef.current.value,
 			date: dateRef.current.value,
 		}
-		dispatch(changeTodo({todoKey, changedTodo}));
+		dispatch(changeTodo({todoForChangeKey, changedTodo}));
 		dispatch(changeTodoModalShow());
 	}
 

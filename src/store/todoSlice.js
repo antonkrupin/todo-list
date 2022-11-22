@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { database } from '../firebase/firebase';
 import { ref, push, remove, update } from 'firebase/database';
 
+
 const todoSlice = createSlice({
   name: 'todos',
   initialState: {
@@ -77,9 +78,9 @@ const todoSlice = createSlice({
 		 * changedTodo - object with changed values
 		 */
     changeTodo: (state, action) => {
-      const { todoKey, changedTodo } = action.payload;
+      const { todoForChangeKey, changedTodo } = action.payload;
       try {
-				update(ref(database, 'todos/' + todoKey), changedTodo);
+				update(ref(database, 'todos/' + todoForChangeKey), changedTodo);
 			} catch(e) {
 				throw e;
 			}
@@ -90,6 +91,7 @@ const todoSlice = createSlice({
 		 * @param {string} action
 		 */
     changeTodoStatus: (state, action) => {
+			state.todoStatus = '';
       state.todoStatus = action.payload;
     }
   }

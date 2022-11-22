@@ -1,6 +1,5 @@
 import * as fb from 'firebase/app';
 import { getDatabase } from 'firebase/database';
-
 import {
 	getStorage,
 	ref,
@@ -38,8 +37,8 @@ export const uploadFile = (file, setFilePath, startLoading, endLoading) => {
 			setFilePath((prev) => {
 				return [...prev, [file.name, downloadURL]];
 			});
-		})
-		endLoading();
+			endLoading();
+		});
 	});
 }
 

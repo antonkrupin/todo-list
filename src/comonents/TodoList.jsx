@@ -1,32 +1,26 @@
 import React from 'react';
-import { ref } from 'firebase/database';
-import { useList } from 'react-firebase-hooks/database';
-import { database } from '../firebase/firebase';
 
 import TodoItem from './TodoItem';
 import ChangeTodoModal from './ChangeTodoModal';
 
-const TodoList = () => {
-	const [snapshots, loading, error] = useList(ref(database, 'todos'));
 
+const TodoList = (props) => {
+	const { todos } = props;
+	
   return (
     <div className="d-flex flex-column">
-      {error && <strong>Error: {error}</strong>}
-        {loading && 
-					<div className="d-flex justify-content-center">
-						<h3 className="text-success">Загрузка списка задач</h3>
-					</div>}
-        {!loading && snapshots && (
-          <>
-						{snapshots.map((elem) => (
-							<TodoItem
-							key={elem.key}
-							todo={elem.val()}
-							id={elem.key}
-						/>
-						))}
-          </>
-        )}
+			{todos.length === 0 && (
+				<div className="d-flex justify-content-center">
+					<h3>Задач нет. Для добавления задач используйте форму выше.</h3>
+				</div>
+			)}
+      {todos.map((todo) => (
+				<TodoItem
+				key={todo.key}
+				todo={todo.val()}
+				id={todo.key}
+			/>
+			))}
 			<ChangeTodoModal />
     </div>
   )

@@ -12,7 +12,7 @@ const AddTodo = () => {
 
 	const [filePaths, setFilePath] = useState([]);
 
-  let reader = new FileReader();
+  const reader = new FileReader();
 
   const titleRef = useRef();
   const descriptionRef = useRef();
@@ -38,13 +38,13 @@ const AddTodo = () => {
   };
 
   const handleFileUplodad = (e) => {
-    let file = e.target.files[0];
+    const file = e.target.files[0];
 		
     reader.onloadend = () => {
 			uploadFile(file,
 				setFilePath,
-				() => dispatch(changeTodoStatus('loading')),
-				() => dispatch(changeTodoStatus('loaded'))
+				() => dispatch(changeTodoStatus('startLoadingFile')),
+				() => dispatch(changeTodoStatus('endLoadingFile'))
 			);
     }
     reader.readAsDataURL(file);
@@ -79,7 +79,7 @@ const AddTodo = () => {
           ref={dateRef}
 					required
         />
-        {todoStatus !== 'loading' && (
+        {todoStatus !== 'startLoadingFile' && (
           <>
              <label className="pb-2" htmlFor="todoFile">Загрузка файлов</label>
             <input
@@ -90,7 +90,7 @@ const AddTodo = () => {
             />
           </>
         )}
-        {todoStatus === 'loading' && (
+        {todoStatus === 'startLoadingFile' && (
           <div className="d-flex align-items-center">
             <div className="spinner-border text-primary m-2" role="status">
             </div>
@@ -99,10 +99,10 @@ const AddTodo = () => {
         )}
         <div>
           {filePaths.map((file, index) => (
-          <li key={index}>
-            {file[0]}
-          </li>
-        ))}
+            <li key={index}>
+              {file[0]}
+            </li>
+          ))}
         </div>
 				<Button buttonType={"AddTask"} />
       </form>
