@@ -43,9 +43,9 @@ const Button = (props) => {
 		}
 		case 'AddTask': {
 			let text = "Добавить задачу";
-			let className = "w-50 btn btn-primary";
+			let className = "btn btn-primary";
 			if (todoStatus === 'loading') {
-				className = "w-50 btn btn-primary disabled";
+				className = "btn btn-primary disabled";
 			}
 			return (
 				<button type="submit" className={className}>{text}</button>
