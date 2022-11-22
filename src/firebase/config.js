@@ -1,4 +1,6 @@
-// Your web app's Firebase configuration
+/**
+ * config for firebase usage
+ */
 const firebaseConfig = {
   apiKey: "AIzaSyAeZr8pgURt3hMf8HBzUAtxm33a1wovf-A",
   authDomain: "test-list-c404a.firebaseapp.com",
