@@ -40,7 +40,7 @@ const AddTodo = () => {
   const handleFileUplodad = (e) => {
     let file = e.target.files[0];
     reader.onloadend = () => {
-      dispatch(changeTodoStatus('loading'))
+      dispatch(changeTodoStatus('loading'));
       const storage = getStorage();
       const filesRef = ref(storage, 'files/' + file.name);
       
@@ -51,10 +51,10 @@ const AddTodo = () => {
             return [...prev, [file.name, downloadURL]];
           });
         })
-        dispatch(changeTodoStatus('loaded'))
+        dispatch(changeTodoStatus('loaded'));
       });
     }
-    reader.readAsDataURL(file)
+    reader.readAsDataURL(file);
   };
 
   return (
