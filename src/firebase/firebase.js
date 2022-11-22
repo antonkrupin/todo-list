@@ -1,7 +1,6 @@
 import * as fb from 'firebase/app';
 import { getDatabase } from 'firebase/database';
 
-
 import {
 	getStorage,
 	ref,
