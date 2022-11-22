@@ -48,31 +48,36 @@ const TodoItem = (props) => {
       <div className="text-break p-3">
 				{todo.completed && (
 					<div>
-						<h3 className="text-success">Завершено</h3>
+						<h4 className="text-success">Завершено</h4>
+						<hr />
 					</div>
 				)}
 				{!todo.completed && expired < 0 && (
 					<div>
-						<h3 className="text-danger">Срок выполнения истек</h3>
+						<h4 className="text-danger">Срок выполнения истек</h4>
+						<hr />
 					</div>
 				)}
         <div className="m-2">
-          <h3>Заголовок</h3>
-          <h5>{todo.title}</h5>
+          <h4 className="text-primary">Заголовок</h4>
+          <h6>{todo.title}</h6>
         </div>
+				<hr />
         <div className="m-2">
-          <h3>Описание</h3>
-          <h5>{todo.description}</h5>
+          <h4 className="text-primary">Описание</h4>
+          <h6>{todo.description}</h6>
         </div>
+				<hr />
         <div className="m-2">
-          <h3>Дата завершения</h3>
-          <h5>{dayjs(todo.date).format('DD-MM-YY')}</h5>
+          <h4 className="text-primary">Дата завершения</h4>
+          <h6>{dayjs(todo.date).format('DD-MM-YY')}</h6>
         </div>
+				<hr />
 				{todo.files && (
 					<div className="m-2">
-          <h3>Прикрепленные файлы</h3>
+          <h4 className="text-primary">Прикрепленные файлы</h4>
           {todo.files.map((file, index) => (
-						<li key={index}><a href={file[1]} target="_blank" rel="noreferrer">{file[0]}</a></li>
+						<li key={index}><a className="text-secondary" href={file[1]} target="_blank" rel="noreferrer">{file[0]}</a></li>
           ))}
 					</div>
 				)}
