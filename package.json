@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "npx serve -s build",
-    "build": "npm run build",
+    "build": "npm run build --omit=dev",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
