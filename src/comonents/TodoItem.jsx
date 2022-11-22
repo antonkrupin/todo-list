@@ -3,10 +3,15 @@ import { useDispatch } from 'react-redux';
 
 import 'datejs';
 
-import { toggleComplete, removeTodo, setTodoForChange } from '../store/todoSlice';
-import { changeTodoModalShow } from '../store/modalsSlice';
+import {
+	toggleComplete,
+	removeTodo,
+	setTodoForChange
+} from '../store/todoSlice';
 
+import { changeTodoModalShow } from '../store/modalsSlice';
 import Button from './Button';
+
 
 const TodoItem = (props) => {
 	const dispatch = useDispatch();
@@ -17,20 +22,20 @@ const TodoItem = (props) => {
 
 	const expired = Date.compare(Date.parse(todo.date), Date.today())
 	
-	const removeTodo = (e) => {
+	const handleRemoveTodo = (e) => {
 		e.preventDefault();
 		const id = todoRef.current.id;
 		dispatch(removeTodo(id));
 	}
 
-	const changeTodo = (e) => {
+	const handleChangeTodo = (e) => {
 		e.preventDefault();
 		const id = todoRef.current.id;
 		dispatch(setTodoForChange({id, todo}));
 		dispatch(changeTodoModalShow());
 	}
 
-	const toggleComplete = (e) => {
+	const handleToggleComplete = (e) => {
 		e.preventDefault();
 		const id = todoRef.current.id;
 		const completed = todo.completed;
@@ -72,9 +77,9 @@ const TodoItem = (props) => {
 				)}
       </div>
       <div className="d-flex flex-column">
-				<Button buttonType={"EndTask"} onClick={(e) => toggleComplete(e)} completed={todo.completed} expired={expired}/>
-				<Button buttonType={"ChangeTask"} onClick={(e) => changeTodo(e)} completed={todo.completed} expired={expired}/>
-				<Button buttonType={"DeleteTask"} onClick={(e) => removeTodo(e)} completed={todo.completed} expired={expired}/>
+				<Button buttonType={"EndTask"} onClick={(e) => handleToggleComplete(e)} completed={todo.completed} expired={expired}/>
+				<Button buttonType={"ChangeTask"} onClick={(e) => handleChangeTodo(e)} completed={todo.completed} expired={expired}/>
+				<Button buttonType={"DeleteTask"} onClick={(e) => handleRemoveTodo(e)} completed={todo.completed} expired={expired}/>
       </div>
     </div>
   )
