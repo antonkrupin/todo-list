@@ -1,6 +1,7 @@
 import * as fb from 'firebase/app';
 import { getDatabase } from 'firebase/database';
 
+
 import {
 	getStorage,
 	ref,
@@ -24,11 +25,14 @@ export const database = getDatabase(firebase);
  * upload file to filestorage
  * @param {File} file uploaded file
  * @param {function} setFilePath function for adding uploaded files paths
+ * @param {function} startLoading function for change loading status to start
+ * @param {function} endLoading function for change loading status to end
  */
-export const uploadFile = (file, setFilePath) => {
+
+export const uploadFile = (file, setFilePath, startLoading, endLoading) => {
 	const storage = getStorage();
 	const filesRef = ref(storage, 'files/' + file.name);
-	
+	startLoading();
 	uploadBytes(filesRef, file)
 	.then((snapshot) => {
 		getDownloadURL(snapshot.ref).then((downloadURL) => {
@@ -36,6 +40,7 @@ export const uploadFile = (file, setFilePath) => {
 				return [...prev, [file.name, downloadURL]];
 			});
 		})
+		endLoading();
 	});
 }
 

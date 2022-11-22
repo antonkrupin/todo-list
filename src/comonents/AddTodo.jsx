@@ -41,9 +41,11 @@ const AddTodo = () => {
     let file = e.target.files[0];
 		
     reader.onloadend = () => {
-      dispatch(changeTodoStatus('loading'));
-			uploadFile(file, setFilePath());
-			dispatch(changeTodoStatus('loaded'));
+			uploadFile(file,
+				setFilePath,
+				() => dispatch(changeTodoStatus('loading')),
+				() => dispatch(changeTodoStatus('loaded'))
+			);
     }
     reader.readAsDataURL(file);
   };

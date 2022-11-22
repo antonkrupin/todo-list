@@ -44,7 +44,7 @@ const TodoItem = (props) => {
 	
   return (
     <div id={id} className="d-flex w-50 mx-auto m-3 shadow-sm justify-content-around align-items-center rounded border" ref={todoRef}>
-      <div>
+      <div className="text-break p-3">
 				{todo.completed && (
 					<div>
 						<h3 className="text-success">Завершено</h3>
@@ -76,7 +76,7 @@ const TodoItem = (props) => {
 					</div>
 				)}
       </div>
-      <div className="d-flex flex-column">
+      <div className="d-flex flex-column p-3">
 				<Button buttonType={"EndTask"} onClick={(e) => handleToggleComplete(e)} completed={todo.completed} expired={expired}/>
 				<Button buttonType={"ChangeTask"} onClick={(e) => handleChangeTodo(e)} completed={todo.completed} expired={expired}/>
 				<Button buttonType={"DeleteTask"} onClick={(e) => handleRemoveTodo(e)} completed={todo.completed} expired={expired}/>
@@ -89,6 +89,6 @@ export default TodoItem;
 
 /*
 
-<li key={index}>{file}</li>
+"start": "npx serve -s build"
 
 */
