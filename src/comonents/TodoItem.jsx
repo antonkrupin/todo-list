@@ -19,7 +19,6 @@ const TodoItem = (props) => {
 	const todoRef = useRef();
 
 	const expired = dayjs(todo.date).diff(dayjs(), 'day');
-	//const expired = Date.compare(Date.parse(todo.date), Date.today())
 	
 	const handleRemoveTodo = (e) => {
 		e.preventDefault();

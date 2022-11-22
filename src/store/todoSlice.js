@@ -1,7 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { database } from '../firebase/firebase';
-import { ref, push, remove, update } from 'firebase/database';
+import {
+	ref,
+	push,
+	remove,
+	update
+} from 'firebase/database';
 
 
 const todoSlice = createSlice({

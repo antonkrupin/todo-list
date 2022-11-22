@@ -58,12 +58,3 @@ const Button = (props) => {
 };
 
 export default Button;
-/*
-
-<button
-          type="submit"
-          className="w-50 btn btn-primary">
-            Добавить задачу
-        </button>
-
-*/

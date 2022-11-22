@@ -31,39 +31,3 @@ const App = () => {
 }
 
 export default App;
-
-/*
-
-<div className="d-flex align-items-center">
-  <div className="spinner-border text-primary m-2" role="status">
-  </div>
-  <h6>Идет загрузка файла</h6>
-</div>
-
-const TodoList = () => {
-	const [snapshots, loading, error] = useList(ref(database, 'todos'));
-	
-  return (
-    <div className="d-flex flex-column">
-      {error && <strong>Error: {error}</strong>}
-        {loading && 
-					<div className="d-flex justify-content-center">
-						<h3 className="text-success">Загрузка списка задач</h3>
-					</div>}
-        {!loading && snapshots && (
-          <>
-						{snapshots.map((elem) => (
-							<TodoItem
-							key={elem.key}
-							todo={elem.val()}
-							id={elem.key}
-						/>
-						))}
-          </>
-        )}
-			<ChangeTodoModal />
-    </div>
-  )
-};
-
-*/
