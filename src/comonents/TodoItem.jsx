@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 import dayjs from 'dayjs';
-import 'datejs';
 
 import {
 	toggleComplete,
@@ -21,28 +20,8 @@ const TodoItem = (props) => {
 
 	const { todo, id } = props;
 
-	//const expired = dayjs(todo.date).diff(dayjs(), 'day');
-	const expired = Date.compare(Date.parse(todo.date), Date.today())
-	/*const today = dayjs().format('DD-MM-YY');
-	const test = dayjs(todo.date);
-	console.log(today.diff(test));*/
-
-	/*const date1 = dayjs();
-	const date2 = dayjs(todo.date);
-	console.log(date1);
-	console.log(date2);
-	console.log(dayjs(todo.date).diff(dayjs(), 'day'));*/
-	//format('DD-MM-YY')
-	/*console.log(todo.date);
-	console.log(date1);
-	console.log(date2);
-	console.log(date1.diff(date2))*/
-
-	/*
-		const date1 = dayjs('2019-01-25')
-	const date2 = dayjs('2018-06-05')
-	date1.diff(date2)
-	*/
+	const expired = dayjs(todo.date).diff(dayjs(), 'day');
+	//const expired = Date.compare(Date.parse(todo.date), Date.today())
 	
 	const handleRemoveTodo = (e) => {
 		e.preventDefault();
@@ -72,7 +51,7 @@ const TodoItem = (props) => {
 						<h3 className="text-success">Завершено</h3>
 					</div>
 				)}
-				{!todo.completed && expired === -1 && (
+				{!todo.completed && expired < 0 && (
 					<div>
 						<h3 className="text-danger">Срок выполнения истек</h3>
 					</div>
