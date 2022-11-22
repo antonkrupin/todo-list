@@ -7,7 +7,7 @@ import { changeTodo } from '../store/todoSlice';
 import { changeTodoModalShow } from '../store/modalsSlice';
 
 
-const ChangeTodoModal = (props) => {
+const ChangeTodoModal = () => {
 	const dispatch = useDispatch();
 
 	const titleRef = useRef();
@@ -17,13 +17,10 @@ const ChangeTodoModal = (props) => {
 	const isChangeTodoShow = useSelector((state) => state.modals.isChangeTodoShow);
 
 	const todoKey = useSelector((state) => state.todos.todoForChange[0]);
+
 	const todoForChange = useSelector((state) => state.todos.todoForChange[1]);
 	
-	const cancelChangeTodo = () => {
-		dispatch(changeTodoModalShow());
-	}
-
-	const saveChanges = (e) => {
+	const handleSaveChanges = (e) => {
 		e.preventDefault();
 		const changedTodo = {
 			title: titleRef.current.value,
@@ -36,7 +33,7 @@ const ChangeTodoModal = (props) => {
 
 	return (
 		<>
-		<Modal show={isChangeTodoShow} onHide={cancelChangeTodo}>
+		<Modal show={isChangeTodoShow} onHide={() => dispatch(changeTodoModalShow())}>
 			<Modal.Header closeButton >
 				<Modal.Title>Изменить задачу</Modal.Title>
 			</Modal.Header>
@@ -53,7 +50,7 @@ const ChangeTodoModal = (props) => {
 						/>
 						<label className="pb-2" htmlFor="todoDescription">Описание задачи</label>
 						<textarea
-							className="form-control pb-2"
+							className="form-control mb-2 pb-2"
 							name="todoDescription" id="" cols="30" rows="5"
 							defaultValue={todoForChange.description}
 							ref={descriptionRef}
@@ -72,10 +69,10 @@ const ChangeTodoModal = (props) => {
 				
 			</Modal.Body>
 			<Modal.Footer>
-          <Button variant="secondary" onClick={cancelChangeTodo}>
+          <Button variant="secondary" onClick={() => dispatch(changeTodoModalShow())}>
             Отменить
           </Button>
-          <Button variant="primary" onClick={(e) => saveChanges(e)}>
+          <Button variant="primary" onClick={(e) => handleSaveChanges(e)}>
             Сохранить
           </Button>
         </Modal.Footer>

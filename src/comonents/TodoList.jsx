@@ -1,11 +1,9 @@
 import React from 'react';
-
-import TodoItem from './TodoItem';
-
 import { ref } from 'firebase/database';
 import { useList } from 'react-firebase-hooks/database';
 import { database } from '../firebase/firebase';
 
+import TodoItem from './TodoItem';
 import ChangeTodoModal from './ChangeTodoModal';
 
 const TodoList = () => {
