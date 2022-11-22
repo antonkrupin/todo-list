@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 const Button = (props) => {
 	const {
@@ -7,6 +8,8 @@ const Button = (props) => {
 		buttonType,
 		expired
 	} = props;
+
+	const todoStatus = useSelector((state) => state.todos.todoStatus);
 
 	switch(buttonType) {
 		case 'EndTask': {
@@ -38,6 +41,16 @@ const Button = (props) => {
 				<button onClick={onClick} className="btn btn-outline-danger m-2">{text}</button>
 			)
 		}
+		case 'AddTask': {
+			let text = "Добавить задачу";
+			let className = "w-50 btn btn-primary";
+			if (todoStatus === 'loading') {
+				className = "w-50 btn btn-primary disabled";
+			}
+			return (
+				<button type="submit" className={className}>{text}</button>
+			)
+		}
 		default: {
 			throw new Error('Unexpected button type');
 		}
@@ -45,3 +58,12 @@ const Button = (props) => {
 };
 
 export default Button;
+/*
+
+<button
+          type="submit"
+          className="w-50 btn btn-primary">
+            Добавить задачу
+        </button>
+
+*/

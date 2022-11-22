@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Button from './Button';
 import { uploadFile } from '../firebase/firebase';
 import { addTodo, changeTodoStatus } from '../store/todoSlice';
 
@@ -100,11 +101,7 @@ const AddTodo = () => {
           </li>
         ))}
         </div>
-        <button
-          type="submit"
-          className="w-50 btn btn-primary">
-            Добавить задачу
-        </button>
+				<Button buttonType={"AddTask"} />
       </form>
     </div>
   )
