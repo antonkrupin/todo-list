@@ -81,7 +81,7 @@ const AddTodo = () => {
         />
         {todoStatus !== 'startLoadingFile' && (
           <>
-             <label className="pb-2" htmlFor="todoFile">Загрузка файлов</label>
+            <label className="pb-2" htmlFor="todoFile">Загрузка файлов</label>
             <input
               className="pb-2 fileInput"
               type="file"
