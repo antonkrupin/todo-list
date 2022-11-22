@@ -1,13 +1,20 @@
 import * as fb from 'firebase/app';
-//import { getFirestore } from 'firebase/firestore';
 import { getDatabase } from 'firebase/database';
 
-import { getStorage, ref, getDownloadURL, uploadBytes } from 'firebase/storage';
+import {
+	getStorage,
+	ref,
+	getDownloadURL,
+	uploadBytes
+} from 'firebase/storage';
 
 import firebaseConfig from "./config";
 
+/**
+ * initialize data base
+ */
 export const firebase = fb.initializeApp(firebaseConfig);
-//export const db = getFirestore(firebase);
+
 /**
  * Data base ref
  */
