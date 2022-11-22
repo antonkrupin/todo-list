@@ -8,7 +8,7 @@ import ChangeTodoModal from './ChangeTodoModal';
 
 const TodoList = () => {
 	const [snapshots, loading, error] = useList(ref(database, 'todos'));
-    
+
   return (
     <div className="d-flex flex-column">
       {error && <strong>Error: {error}</strong>}
