@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
+import dayjs from 'dayjs';
 import 'datejs';
 
 import {
@@ -20,7 +21,28 @@ const TodoItem = (props) => {
 
 	const { todo, id } = props;
 
+	//const expired = dayjs(todo.date).diff(dayjs(), 'day');
 	const expired = Date.compare(Date.parse(todo.date), Date.today())
+	/*const today = dayjs().format('DD-MM-YY');
+	const test = dayjs(todo.date);
+	console.log(today.diff(test));*/
+
+	/*const date1 = dayjs();
+	const date2 = dayjs(todo.date);
+	console.log(date1);
+	console.log(date2);
+	console.log(dayjs(todo.date).diff(dayjs(), 'day'));*/
+	//format('DD-MM-YY')
+	/*console.log(todo.date);
+	console.log(date1);
+	console.log(date2);
+	console.log(date1.diff(date2))*/
+
+	/*
+		const date1 = dayjs('2019-01-25')
+	const date2 = dayjs('2018-06-05')
+	date1.diff(date2)
+	*/
 	
 	const handleRemoveTodo = (e) => {
 		e.preventDefault();
@@ -65,7 +87,7 @@ const TodoItem = (props) => {
         </div>
         <div className="m-2">
           <h3>Дата завершения</h3>
-          <h5>{todo.date}</h5>
+          <h5>{dayjs(todo.date).format('DD-MM-YY')}</h5>
         </div>
 				{todo.files && (
 					<div className="m-2">

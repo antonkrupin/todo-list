@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import 'datejs';
+
+import dayjs from 'dayjs';
 
 import { uploadFile } from '../firebase/firebase';
 import { addTodo, changeTodoStatus } from '../store/todoSlice';
@@ -21,7 +22,7 @@ const AddTodo = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-
+		
     dispatch(addTodo({
       title: titleRef.current.value,
       description: descriptionRef.current.value,
