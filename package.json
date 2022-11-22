@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "npx serve -s build",
-    "build": "NODE_ENV=production npm run build --omit=dev",
+    "build": "npm run build --omit=dev",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
