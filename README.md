@@ -1,12 +1,12 @@
 # Todo List Application
 
-This application use firebase for store data.
+Application use firebase for store data.
+
+Application use dayjs for check expired date for task.
 
 You can add, change, delete todo tasks.
 
 Also you can upload files for new task, this files will stored in firebase storage.
-
-This application use dayjs for check expired date for task.
 
 ## For using this application:
 
